@@ -9,6 +9,7 @@ using System.Timers;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Shapes;
 
 namespace RobotArmAPP.Classes
@@ -17,9 +18,9 @@ namespace RobotArmAPP.Classes
     {
         Blocker blocker = new Blocker();
         HTTPRequests httpRequests = new HTTPRequests();
-        //Movement movement = new Movement(90, 90, 90, 90, 90, 100, 1000, 0);
+        SpeedControl speedControl = new SpeedControl();
 
-        public void FramePlayback(DispatcherTimer playbackTimer,
+        public async void FramePlayback(DispatcherTimer playbackTimer,
                                   Rectangle Blocker1,
                                   Rectangle Blocker2,
                                   Rectangle Blocker3,
@@ -30,23 +31,38 @@ namespace RobotArmAPP.Classes
                                   Slider Eixo1Slider,
                                   Slider Eixo2Slider,
                                   Slider Eixo3Slider,
-                                  Slider Eixo4Slider,
-                                  Slider GarraSlider,
+                                  ToggleButton LaserSwitch,
                                   Button StopPlayback)
         {
             try
             {
                 FramesListView.SelectedIndex = Controller.currentFramePosition;
-                playbackTimer.Interval = TimeSpan.FromMilliseconds(Controller.framesList[Controller.currentFramePosition][6]);
-                DelayBox.Text = Convert.ToString(Controller.framesList[Controller.currentFramePosition][6]);
-                FrameSpeedBox.Text = Convert.ToString(Controller.framesList[Controller.currentFramePosition][5]);
-                GarraSlider.Value = Controller.framesList[Controller.currentFramePosition][0];
-                Eixo4Slider.Value = Controller.framesList[Controller.currentFramePosition][1];
-                Eixo3Slider.Value = Controller.framesList[Controller.currentFramePosition][2];
-                Eixo2Slider.Value = Controller.framesList[Controller.currentFramePosition][3];
-                Eixo1Slider.Value = Controller.framesList[Controller.currentFramePosition][4];
+                playbackTimer.Interval = TimeSpan.FromMilliseconds(Controller.framesList[Controller.currentFramePosition][5]);
+                DelayBox.Text = Convert.ToString(Controller.framesList[Controller.currentFramePosition][5]);
+                FrameSpeedBox.Text = Convert.ToString(Controller.framesList[Controller.currentFramePosition][4]);
 
-                //await await httpRequests.SendMovementToRobot(movement); mudar isPlaying == false nos controles quando ativar
+                if (Controller.framesList[Controller.currentFramePosition][4] == 100)
+                {
+                    LaserSwitch.IsChecked = Controller.framesList[Controller.currentFramePosition][0];
+                    Eixo3Slider.Value = Controller.framesList[Controller.currentFramePosition][1];
+                    Eixo2Slider.Value = Controller.framesList[Controller.currentFramePosition][2];
+                    Eixo1Slider.Value = Controller.framesList[Controller.currentFramePosition][3];
+                }
+                else if (Controller.framesList[Controller.currentFramePosition][5] == 0)
+                {
+                    Controller.isOkToSendMoviments = false;
+                    LaserSwitch.IsChecked = Controller.framesList[Controller.currentFramePosition][0];
+                    Eixo3Slider.Value = Controller.framesList[Controller.currentFramePosition][1];
+                    Eixo2Slider.Value = Controller.framesList[Controller.currentFramePosition][2];
+                    Eixo1Slider.Value = Controller.framesList[Controller.currentFramePosition][3];
+                    Controller.isOkToSendMoviments = true;
+                }
+                else
+                {
+                    await speedControl.Axis1SpeedControl(Eixo1Slider, FramesListView);
+                }
+
+                //await httpRequests.SendMovementToRobot(movement); mudar isPlaying == false nos controles quando ativar
 
                 if (Controller.framesList.Count > Controller.currentFramePosition + 1)
                     Controller.currentFramePosition++;
@@ -96,10 +112,5 @@ namespace RobotArmAPP.Classes
             Controller.isPlaying = isON;
             MainPage.LeftMenuAccess.IsEnabled = !isON;
         }
-
-        /*~Playback() //Destructor como tentativa de zerar a posição do frame (não funcionou)
-        {
-            Controller.currentFramePosition = 0;
-        }*/
     }
 }

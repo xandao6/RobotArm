@@ -11,7 +11,6 @@ namespace RobotArmAPP.Classes
 {
     class Frames
     {
-
         public void InsertFrameFunction(ListView FramesListView, Movement movement)
         {
             try
@@ -80,19 +79,16 @@ namespace RobotArmAPP.Classes
             }
         }
 
-        public void SendItemsToSlidersWhenDoubleTapped(TextBox FrameSpeedBox, TextBox DelayBox, ListView FramesListView, Slider Eixo1Slider, Slider Eixo2Slider, Slider Eixo3Slider, Slider Eixo4Slider, Slider GarraSlider)
+        public void SendItemsToSlidersWhenDoubleTapped(TextBox FrameSpeedBox, TextBox DelayBox, ListView FramesListView, Slider Eixo1Slider, Slider Eixo2Slider, Slider Eixo3Slider)
         {
             try
             {
                 int[] selectedArray = Controller.framesList[FramesListView.SelectedIndex];
-
-                GarraSlider.Value = selectedArray[0];
-                Eixo4Slider.Value = selectedArray[1];
-                Eixo3Slider.Value = selectedArray[2];
-                Eixo2Slider.Value = selectedArray[3];
-                Eixo1Slider.Value = selectedArray[4];
-                FrameSpeedBox.Text = Convert.ToString(selectedArray[5]);
-                DelayBox.Text = Convert.ToString(selectedArray[6]);
+                Eixo3Slider.Value = selectedArray[0];
+                Eixo2Slider.Value = selectedArray[1];
+                Eixo1Slider.Value = selectedArray[2];
+                FrameSpeedBox.Text = Convert.ToString(selectedArray[3]);
+                DelayBox.Text = Convert.ToString(selectedArray[4]);
             }
             catch (Exception ex)
             {

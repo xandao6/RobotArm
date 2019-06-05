@@ -1199,7 +1199,7 @@
                 Background="#CCFFFFFF"
                 BorderBrush="#FFF7CC01"
                 InputScope="Digits"
-                IsEnabled="True"
+                IsEnabled="False"
                 KeyDown="FrameSpeedBox_KeyDown"
                 KeyUp="FrameSpeedBox_KeyUp"
                 LostFocus="FrameSpeedBox_LostFocus"
@@ -1424,6 +1424,12 @@
                 Foreground="White"
                 Text="0"
                 TextWrapping="Wrap" />
+            <Button
+                x:Name="BTN_TESTE"
+                Margin="298,1,0,0"
+                VerticalAlignment="Top"
+                Click="BTN_TESTE_Click"
+                Content="Teste" />
         </Grid>
         <Grid
             Width="400"
@@ -1446,14 +1452,13 @@
                 <RowDefinition Height="80" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="80" />
-                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
             <Slider
                 x:Name="Eixo1Slider"
-                Grid.Row="5"
-                Margin="23,0,22,0"
-                VerticalAlignment="Center"
+                Grid.Row="4"
+                Margin="23,16,22,0"
+                VerticalAlignment="Top"
                 Background="#CCFFFFFF"
                 Foreground="#FFF7CC01"
                 Maximum="180"
@@ -1465,8 +1470,8 @@
                 Value="90" />
             <Slider
                 x:Name="Eixo2Slider"
-                Grid.Row="4"
-                Margin="23,0,22,0"
+                Grid.Row="3"
+                Margin="25,0,20,0"
                 VerticalAlignment="Center"
                 Background="#CCFFFFFF"
                 Foreground="#FFF7CC01"
@@ -1479,9 +1484,9 @@
                 Value="90" />
             <Slider
                 x:Name="Eixo3Slider"
-                Grid.Row="3"
-                Margin="23,0,22,0"
-                VerticalAlignment="Center"
+                Grid.Row="2"
+                Margin="23,16,22,0"
+                VerticalAlignment="Top"
                 Background="#CCFFFFFF"
                 Foreground="#FFF7CC01"
                 Maximum="180"
@@ -1491,40 +1496,12 @@
                 Style="{StaticResource SliderStyle1}"
                 ValueChanged="Eixo3Slider_ValueChanged"
                 Value="90" />
-            <Slider
-                x:Name="Eixo4Slider"
-                Grid.Row="2"
-                Margin="23,0,22,0"
-                VerticalAlignment="Center"
-                Background="#CCFFFFFF"
-                Foreground="#FFF7CC01"
-                Maximum="180"
-                Minimum="0"
-                Orientation="Horizontal"
-                SmallChange="1"
-                Style="{StaticResource SliderStyle1}"
-                ValueChanged="Eixo4Slider_ValueChanged"
-                Value="90" />
-            <Slider
-                x:Name="GarraSlider"
-                Grid.Row="1"
-                Margin="23,0,22,0"
-                VerticalAlignment="Center"
-                Background="#CCFFFFFF"
-                Foreground="#FFF7CC01"
-                Maximum="180"
-                Minimum="0"
-                Orientation="Horizontal"
-                SmallChange="1"
-                Style="{StaticResource SliderStyle1}"
-                ValueChanged="GarraSlider_ValueChanged"
-                Value="90" />
             <TextBox
                 x:Name="Eixo1SliderBox"
-                Grid.Row="5"
+                Grid.Row="4"
                 Grid.Column="1"
-                Margin="10,26,19,0"
-                VerticalAlignment="Top"
+                Margin="10,0,19,0"
+                VerticalAlignment="Center"
                 Background="#CCFFFFFF"
                 BorderBrush="#FFF7CC01"
                 InputScope="Digits"
@@ -1536,9 +1513,9 @@
                 TextAlignment="Center" />
             <TextBox
                 x:Name="Eixo2SliderBox"
-                Grid.Row="4"
+                Grid.Row="3"
                 Grid.Column="1"
-                Margin="10,26,19,0"
+                Margin="12,26,17,0"
                 VerticalAlignment="Top"
                 Background="#CCFFFFFF"
                 BorderBrush="#FFF7CC01"
@@ -1551,10 +1528,10 @@
                 TextAlignment="Center" />
             <TextBox
                 x:Name="Eixo3SliderBox"
-                Grid.Row="3"
+                Grid.Row="2"
                 Grid.Column="1"
-                Margin="10,26,19,0"
-                VerticalAlignment="Top"
+                Margin="10,0,19,0"
+                VerticalAlignment="Center"
                 Background="#CCFFFFFF"
                 BorderBrush="#FFF7CC01"
                 InputScope="Digits"
@@ -1564,75 +1541,37 @@
                 Style="{StaticResource TextBoxStyle1}"
                 Text="{Binding ElementName=Eixo3Slider, Path=Value, Mode=TwoWay}"
                 TextAlignment="Center" />
-            <TextBox
-                x:Name="Eixo4SliderBox"
-                Grid.Row="2"
-                Grid.Column="1"
-                Margin="10,26,19,0"
-                VerticalAlignment="Top"
-                Background="#CCFFFFFF"
-                BorderBrush="#FFF7CC01"
-                InputScope="Digits"
-                KeyDown="Eixo4SliderBox_KeyDown"
-                KeyUp="Eixo4SliderBox_KeyUp"
-                LostFocus="Eixo4SliderBox_LostFocus"
-                Style="{StaticResource TextBoxStyle1}"
-                Text="{Binding ElementName=Eixo4Slider, Path=Value, Mode=TwoWay}"
-                TextAlignment="Center" />
-            <TextBox
-                x:Name="GarraSliderBox"
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="10,26,19,0"
-                VerticalAlignment="Top"
-                Background="#CCFFFFFF"
-                BorderBrush="#FFF7CC01"
-                InputScope="Digits"
-                KeyDown="GarraSliderBox_KeyDown"
-                KeyUp="GarraSliderBox_KeyUp"
-                LostFocus="GarraSliderBox_LostFocus"
-                Style="{StaticResource TextBoxStyle1}"
-                Text="{Binding ElementName=GarraSlider, Path=Value, Mode=TwoWay}"
-                TextAlignment="Center" />
             <TextBlock
-                Grid.Row="5"
-                Margin="23,0,0,0"
+                Grid.Row="3"
+                Margin="23,78,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Foreground="White"
                 Text="Base"
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap" Grid.RowSpan="2" />
             <TextBlock
-                Grid.Row="4"
-                Margin="23,0,0,0"
+                Grid.Row="3"
+                Margin="25,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Foreground="White"
                 Text="Lower Arm"
                 TextWrapping="Wrap" />
             <TextBlock
-                Grid.Row="3"
-                Margin="23,0,0,0"
+                Grid.Row="1"
+                Margin="23,78,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Foreground="White"
                 Text="Upper Arm"
-                TextWrapping="Wrap" />
-            <TextBlock
-                Grid.Row="2"
-                Margin="23,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Foreground="White"
-                Text="Wrist"
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap" Grid.RowSpan="2" />
             <TextBlock
                 Grid.Row="1"
                 Margin="23,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Foreground="White"
-                Text="Gripper"
+                Text="Laser"
                 TextWrapping="Wrap" />
 
             <Border
@@ -1666,15 +1605,14 @@
             <AppBarButton
                 x:Name="SendButton"
                 Grid.Row="5"
-                Grid.RowSpan="2"
-                Width="46"
+                Width="84"
                 Height="76"
-                Margin="156,64,0,0"
+                Margin="158,24,0,0"
                 Click="SendButton_Click"
                 Foreground="White"
                 Icon="Play"
                 Label="Send"
-                RenderTransformOrigin="0.707,0.52"
+                RenderTransformOrigin="0.548,0.526"
                 Style="{StaticResource AppBarButtonStyle1}" />
             <AppBarButton
                 x:Name="ResetControlsButton"
@@ -1696,6 +1634,7 @@
                 VerticalAlignment="Stretch"
                 Fill="#4C000000"
                 Visibility="Collapsed" />
+            <ToggleButton x:Name="LaserSwitch" Content="Laser ON" Margin="105,14,0,0" Grid.Row="1" Height="56" Width="147" VerticalAlignment="Top" Foreground="White" Checked="LaserSwitch_Checked"/>
 
         </Grid>
         <Image

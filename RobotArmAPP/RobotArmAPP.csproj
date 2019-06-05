@@ -97,6 +97,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\ControlsIndex.cs" />
     <Compile Include="Classes\Blocker.cs" />
     <Compile Include="Classes\Controls.cs" />
     <Compile Include="Classes\DelayControl.cs" />

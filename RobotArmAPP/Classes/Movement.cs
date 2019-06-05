@@ -8,8 +8,7 @@ namespace RobotArmAPP.Classes
 {
     class Movement
     {
-        public int Garra { get; set; }
-        public int Axis4 { get; set; }
+        public int Laser { get; set; }
         public int Axis3 { get; set; }
         public int Axis2 { get; set; }
         public int Axis1 { get; set; }
@@ -17,10 +16,9 @@ namespace RobotArmAPP.Classes
         public int Delay { get; set; }
         public int RepeatTimes { get; set; }
 
-        public Movement(int garra, int axis4, int axis3, int axis2, int axis1, int speed, int delay, int repeatTimes)
+        public Movement(int laser, int axis3, int axis2, int axis1, int speed, int delay, int repeatTimes)
         {
-            this.Garra = garra;
-            this.Axis4 = axis4;
+            this.Laser = laser;
             this.Axis3 = axis3;
             this.Axis2 = axis2;
             this.Axis1 = axis1;
@@ -36,76 +34,37 @@ namespace RobotArmAPP.Classes
             onlyAxis
         }
 
+        public enum LaserState
+        {
+            ON,
+            OFF
+        }
+
         public string MovesToString(StringType stringType)
         {
             switch (stringType)
             {
                 case StringType.all:
-                    return this.Garra + "," + this.Axis4 + "," + this.Axis3 + "," + this.Axis2 + "," + this.Axis1 + "," + this.Speed + "," + this.Delay;
+                    return this.Laser + "," + this.Axis3 + "," + this.Axis2 + "," + this.Axis1 + "," + this.Speed + "," + this.Delay;
                 case StringType.allWithInfo:
-                    return "[" + this.Garra.ToString("000") + "," + this.Axis4.ToString("000") + "," + this.Axis3.ToString("000") + "," + this.Axis2.ToString("000") + "," + this.Axis1.ToString("000") + "] Speed: " + this.Speed.ToString("000") + ", Delay: " + this.Delay.ToString("000000") + "ms";
+                    return "[" + this.Laser.ToString("000") + "," + this.Axis3.ToString("000") + "," + this.Axis2.ToString("000") + "," + this.Axis1.ToString("000") + "] Speed: " + this.Speed.ToString("000") + ", Delay: " + this.Delay.ToString("000000") + "ms";
                 case StringType.onlyAxis:
-                    return this.Garra + "," + this.Axis4 + "," + this.Axis3 + "," + this.Axis2 + "," + this.Axis1;
+                    return this.Laser + "," + this.Axis3 + "," + this.Axis2 + "," + this.Axis1;
             }
             return null;
         }
 
         public int[] MovesToIntVector()
         {
-            int[] Move = new int[7];
-            Move[0] = this.Garra;
-            Move[1] = this.Axis4;
-            Move[2] = this.Axis3;
-            Move[3] = this.Axis2;
-            Move[4] = this.Axis1;
-            Move[5] = this.Speed;
-            Move[6] = this.Delay;
+            int[] Move = new int[5];
+            Move[0] = this.Laser;
+            Move[1] = this.Axis3;
+            Move[2] = this.Axis2;
+            Move[3] = this.Axis1;
+            Move[4] = this.Speed;
+            Move[5] = this.Delay;
 
             return Move;
         }
-
-        /*public List<string> MovesToStringList()
-{
-    List<string> Move = new List<string>
-    {
-        garra.ToString(),
-        axis4.ToString(),
-        axis3.ToString(),
-        axis2.ToString(),
-        axis1.ToString(),
-        speed.ToString(),
-        delay.ToString()
-    };
-    return Move;
-}*/
-
-        /*public List<int> MovesToIntList()
-        {
-            List<int> Move = new List<int>
-            {
-                garra,
-                axis4,
-                axis3,
-                axis2,
-                axis1,
-                speed,
-                delay
-            };
-            return Move;
-        }*/
-
-        /*public string[] MovesToStringVector()
-        {
-            string[] Move = new string[7];
-            Move[0] = garra.ToString();
-            Move[1] = axis4.ToString();
-            Move[2] = axis3.ToString();
-            Move[3] = axis2.ToString();
-            Move[4] = axis1.ToString();
-            Move[5] = speed.ToString();
-            Move[6] = delay.ToString();
-
-            return Move;
-        }*/
     }
 }

@@ -13,23 +13,11 @@ namespace RobotArmAPP.Classes
     {
         HTTPRequests httpRequests = new HTTPRequests();
 
-        public enum ControlsIndex
-        {
-            Gripper,
-            Axis4,
-            Axis3,
-            Axis2,
-            Axis1,
-            FrameSpeedBox,
-            DelayBox,
-            RepeatTimesBox
-        }
-
         public async Task SendSlidersValues(bool liveBoxStatus, bool isOkToSendMoviments, bool isPlaying, Movement movement)
         {
             try
             {
-                if (liveBoxStatus == true && isOkToSendMoviments == true || isPlaying == true)
+                if ((liveBoxStatus == true || isPlaying == true) && isOkToSendMoviments == true)
                     await httpRequests.SendMovementToRobot(movement);
             }
             catch (Exception ex)
@@ -60,10 +48,7 @@ namespace RobotArmAPP.Classes
             }
         }
 
-        public async Task BoxesMaxNumberLimiter(ControlsIndex controlsIndex,
-                                                TextBox RepeatTimesBox,
-                                                TextBox FrameSpeedBox,
-                                                TextBox DelayBox)
+        public async Task BoxesMaxNumberLimiter(ControlsIndex.ControlsEnum controlsIndexEnum, TextBox RepeatTimesBox, TextBox FrameSpeedBox, TextBox DelayBox)
         {
             try
             {
@@ -74,9 +59,9 @@ namespace RobotArmAPP.Classes
                 int minimum = 900 * 100 / speed;
                 int minimum1degree = 5 * 100 / speed;
 
-                switch (controlsIndex)
+                switch (controlsIndexEnum)
                 {
-                    case ControlsIndex.FrameSpeedBox:
+                    case ControlsIndex.ControlsEnum.FrameSpeedBox:
                         FrameSpeedBox.UpdateLayout();
                         if (dSpeed > 100.0)
                             FrameSpeedBox.Text = "100";
@@ -86,7 +71,7 @@ namespace RobotArmAPP.Classes
                         if (dDelay < minimum)
                             DelayBox.Text = Convert.ToString(minimum);
                         break;
-                    case ControlsIndex.DelayBox:
+                    case ControlsIndex.ControlsEnum.DelayBox:
                         DelayBox.UpdateLayout();
                         if (dDelay > 300000.0)
                             DelayBox.Text = "300000";
@@ -99,7 +84,7 @@ namespace RobotArmAPP.Classes
                             await dialog.ShowAsync();
                         }
                         break;
-                    case ControlsIndex.RepeatTimesBox:
+                    case ControlsIndex.ControlsEnum.RepeatTimesBox:
                         RepeatTimesBox.UpdateLayout();
                         if (dRepeats > 10000.0)
                             RepeatTimesBox.Text = "10000";

@@ -147,15 +147,14 @@ namespace RobotArmAPP.Classes
                     await FileIO.WriteTextAsync(file, "{\"repeatTimes\":" + repeatTimes + ",\"moves\":[");
                     for (int i = 0; i < Controller.framesList.Count; i++) //salva os frames linha por linha
                     {
-                        string garra = string.Format("{0:D3}", Controller.framesList[i][0]);
-                        string axis4 = string.Format("{0:D3}", Controller.framesList[i][1]);
-                        string axis3 = string.Format("{0:D3}", Controller.framesList[i][2]);
-                        string axis2 = string.Format("{0:D3}", Controller.framesList[i][3]);
-                        string axis1 = string.Format("{0:D3}", Controller.framesList[i][4]);
-                        string speed = string.Format("{0:D3}", Controller.framesList[i][5]);
-                        string delay = string.Format("{0:D6}", Controller.framesList[i][6]);
+                        string laser = string.Format("{0:D3}", Controller.framesList[i][0]);
+                        string axis3 = string.Format("{0:D3}", Controller.framesList[i][1]);
+                        string axis2 = string.Format("{0:D3}", Controller.framesList[i][2]);
+                        string axis1 = string.Format("{0:D3}", Controller.framesList[i][3]);
+                        string speed = string.Format("{0:D3}", Controller.framesList[i][4]);
+                        string delay = string.Format("{0:D6}", Controller.framesList[i][5]);
 
-                        await FileIO.AppendTextAsync(file, "{\"garra\":\"" + garra + "\",\"axis4\":\"" + axis4 + "\",\"axis3\":\"" + axis3 + "\",\"axis2\":\"" + axis2 + "\",\"axis1\":\"" + axis1 + "\",\"speed\":\"" + speed + "\",\"delay\":\"" + delay + "\"}");
+                        await FileIO.AppendTextAsync(file, "{\"laser\":\"" + laser + "\",\"axis3\":\"" + axis3 + "\",\"axis2\":\"" + axis2 + "\",\"axis1\":\"" + axis1 + "\",\"speed\":\"" + speed + "\",\"delay\":\"" + delay + "\"}");
                         if (i != Controller.framesList.Count - 1)
                         {
                             await FileIO.AppendTextAsync(file, ",");
@@ -188,8 +187,7 @@ namespace RobotArmAPP.Classes
             {
                 for (int i = 0; i < moves.Movements.Count; i++)
                 {
-                    movement.Garra = Convert.ToInt16(moves.Movements[i].Garra);
-                    movement.Axis4 = Convert.ToInt16(moves.Movements[i].Axis4);
+                    movement.Laser = Convert.ToInt16(moves.Movements[i].Laser);
                     movement.Axis3 = Convert.ToInt16(moves.Movements[i].Axis3);
                     movement.Axis2 = Convert.ToInt16(moves.Movements[i].Axis2);
                     movement.Axis1 = Convert.ToInt16(moves.Movements[i].Axis1);
@@ -205,20 +203,18 @@ namespace RobotArmAPP.Classes
             {
                 for (int i = 0; i < moves.Mov.Count; i++)
                 {
-                    movement.Garra = Convert.ToInt16(moves.Mov[i][0].ToString());
-                    movement.Axis4 = Convert.ToInt16(moves.Mov[i][1].ToString());
-                    movement.Axis3 = Convert.ToInt16(moves.Mov[i][2].ToString());
-                    movement.Axis2 = Convert.ToInt16(moves.Mov[i][3].ToString());
-                    movement.Axis1 = Convert.ToInt16(moves.Mov[i][4].ToString());
-                    movement.Speed = Convert.ToInt16(moves.Mov[i][5].ToString());
-                    movement.Delay = Convert.ToInt32(moves.Mov[i][6].ToString());
+                    movement.Laser = Convert.ToInt16(moves.Mov[i][0].ToString());
+                    movement.Axis3 = Convert.ToInt16(moves.Mov[i][1].ToString());
+                    movement.Axis2 = Convert.ToInt16(moves.Mov[i][2].ToString());
+                    movement.Axis1 = Convert.ToInt16(moves.Mov[i][3].ToString());
+                    movement.Speed = Convert.ToInt16(moves.Mov[i][4].ToString());
+                    movement.Delay = Convert.ToInt32(moves.Mov[i][5].ToString());
                     Controller.framesList.Add(movement.MovesToIntVector());
                     FramesListView.Items.Add(movement.MovesToString(Movement.StringType.allWithInfo));
                 }
                 RepeatTimesBox.Text = moves.Rpt.ToString();
                 FramesListView.SelectedIndex = FramesListView.Items.Count - 1;
             }
-
         }
     }
 }

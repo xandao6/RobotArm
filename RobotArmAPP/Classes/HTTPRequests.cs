@@ -25,7 +25,7 @@ namespace RobotArmAPP.Classes
             try
             {
                 var cancellation = new CancellationTokenSource(new TimeSpan(0, 0, 0, timeoutSeconds, timeoutMilliseconds));
-                await client.GetAsync(BaseUrl + PortForSendFrames + "/?param1=" + movement.Axis1 + "&param2=" + movement.Axis2 + "&param3=" + movement.Axis3 + "&param4=" + movement.Axis4 + "&param5=" + movement.Garra, cancellation.Token);
+                await client.GetAsync(BaseUrl + PortForSendFrames + "/?param1=" + movement.Axis1 + "&param2=" + movement.Axis2 + "&param3=" + movement.Axis3 + "&param4=" + movement.Laser, cancellation.Token);
             }
             catch (HttpRequestException ex)
             {

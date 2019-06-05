@@ -32,11 +32,8 @@ namespace RobotArmAPP.Classes
         [JsonProperty("axis3")]
         public string Axis3 { get; set; }
 
-        [JsonProperty("axis4")]
-        public string Axis4 { get; set; }
-
-        [JsonProperty("garra")]
-        public string Garra { get; set; }
+        [JsonProperty("laser")]
+        public string Laser { get; set; }
 
         [JsonProperty("speed")]
         public string Speed { get; set; }
